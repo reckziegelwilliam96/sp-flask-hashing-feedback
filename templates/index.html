@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}User Feedback - Home{% endblock %}
+{% block content %}
+
+<h1 class="display-4">User Feedback App</h1>
+<p class="lead"> Register or Login for secret</p>
+
+<ul class="container container-light">
+    {% if 'username' not in session %}
+        <li class="container-item"><a href="/register">Register</a></li>
+        <li class="container-item"><a href="/login">Log In</a></li>
+    {% endif %}
+
+    {% if 'username' in session %}
+        <li class="container-item"><a href="/logout">Logout</a></li>
+        <li class="container-item"><a href="/users/{{ username }}">Info & Feedback</a></li>
+    {% endif %}
+</ul>
+
+{% endblock %}

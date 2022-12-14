@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title> Flask Feedback &ndash; {% block title %}  {% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <a class="text-white" href="/">User Feedback</a></h1>
+        </div>
+        <ul class="navbar-nav">
+            <li class="nav item">
+                {% if 'username' in session %}
+                <a class="nav-link" href="/logout">Logout</a>
+                {% else %}
+                <a class="nav-link" href="/login">Login</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5 container-light">
+    {% for msg in get_flashed_messages() %}
+        <div class="alert alert-info">{{ msg }}</div>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

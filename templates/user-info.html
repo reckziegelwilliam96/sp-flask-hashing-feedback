@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ user.username }} Feedback {% endblock %}
+
+{% block content %}
+<h1 class="display-4">{{ user.username }} Account</h1>
+
+<div class="container mt-5" data-user-id="{{ user.id }}">
+    <div class="row">
+        <div class="col-sm-10 col-12">
+            <p> Username:</p> 
+            <p>{{ user.username }}</p>
+            
+            <p>First Name:</p>
+            <p>{{ user.first_name }}</p>
+            
+            <p>Last Name:</p> 
+            <p>{{ user.last_name }}</p>
+            
+            <p>Email:</p> 
+            <p>{{ user.email }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 col-12">
+            <ul>
+            {% for feed in user.feedback %}
+                <p>
+                    <li>>{{ feed.title }}
+                        <small> {{ feed.content }}</small>
+                        <p><form action="/feedback/{{ feed.id }}/update" method="GET">
+                            <button class="btn btn-secondary">Edit Feedback</button>
+                        </form></p>
+                        <p><form action="/users/{{ user.username }}/feedback/delete" method="GET">
+                            <button class="btn btn-secondary">Delete Feedback</button>
+                        </form></p>
+                    </li>
+                </p>
+            {% endfor %}
+            </ul>
+            <span>
+                <p>
+                    <a href="/users/{{ user.username }}/feedback/add" class="btn btn-primary">
+                        Add Feedback
+                    </a>
+                </p>
+            </span>
+            <span>
+                <p>
+                    <a href="/users/{{ user.username }}/delete" class="btn btn-primary">
+                        Delete Account
+                    </a>
+                </p>
+            </span>
+        </div>
+    </div>
+</div>
+{% endblock %}
